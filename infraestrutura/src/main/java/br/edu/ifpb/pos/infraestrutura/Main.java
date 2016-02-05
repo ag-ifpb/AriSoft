@@ -1,6 +1,7 @@
 package br.edu.ifpb.pos.infraestrutura;
 
 import br.edu.ifpb.pos.infraestrutura.servicos.JogoService;
+import br.edu.ifpb.pos.infraestrutura.servicos.InfraestruturaService;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.xml.ws.Endpoint;
@@ -22,16 +23,16 @@ import org.springframework.context.annotation.Configuration;
 public class Main {
 
     @Inject
-    private JogoService jogoServiceTmp;
-    private static JogoService jogoService;
+    private InfraestruturaService mainServiceTmp;
+    private static InfraestruturaService mainService;
     
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);        
-        Endpoint.publish("http://localhost:8081/jogo",jogoService);
+        Endpoint.publish("http://localhost:8081/service",mainService);
     }
     
     @PostConstruct
     public void init(){
-        jogoService = jogoServiceTmp;
+        mainService = mainServiceTmp;
     }
 }

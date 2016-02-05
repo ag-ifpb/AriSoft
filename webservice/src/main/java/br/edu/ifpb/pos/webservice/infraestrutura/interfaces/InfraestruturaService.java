@@ -1,6 +1,7 @@
 package br.edu.ifpb.pos.webservice.infraestrutura.interfaces;
 
 import br.edu.ifpb.pos.core.dto.Jogos;
+import br.edu.ifpb.pos.core.entidades.Foto;
 import br.edu.ifpb.pos.core.entidades.Jogo;
 import javax.jws.WebService;
 
@@ -8,12 +9,14 @@ import javax.jws.WebService;
  *
  * @author douglasgabriel
  */
-@WebService(name = "JogoService"
+@WebService(name = "InfraestruturaService"
         , targetNamespace = "http://servicos.infraestrutura.pos.ifpb.edu.br/")
-public interface JogoService {
+public interface InfraestruturaService {
     
-    public void criar (Jogo jogo);
+    public void adicionarJogo (Jogo jogo);
     
-    public Jogos recuperarPagina (int page, int pageSize);
+    public Jogos recuperarPaginaJogo (int page, int pageSize);
+    
+    public Foto recuperarFoto (long id);
     
 }

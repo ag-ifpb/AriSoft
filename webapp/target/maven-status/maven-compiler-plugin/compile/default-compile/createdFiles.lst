@@ -1,6 +1,7 @@
 br/edu/ifpb/pos/webapp/controller/webservices/interfaces/AppWebService.class
 br/edu/ifpb/pos/webapp/controller/services/JogoServiceImpl.class
 br/edu/ifpb/pos/webapp/Application.class
+br/edu/ifpb/pos/webapp/controller/fotos/FotoController.class
 br/edu/ifpb/pos/webapp/utils/PageServerUtils.class
 br/edu/ifpb/pos/webapp/controller/jogos/JogosCadastroController.class
 br/edu/ifpb/pos/webapp/controller/forms/AdicionarJogoForm.class

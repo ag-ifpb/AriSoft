@@ -3,8 +3,20 @@
     background-size: cover;
     height: 300px !important;
 }
+.widget-user-username{
+    text-shadow: 1px 1px 1px black !important;
+}
+.active{
+    background-color: rgba(0,0,0,0.5) !important;
+}
+.text-white{
+    color:white;
+}
 .bg-verde-oliva{
     background-color: #2d4f36 !important;
+}
+.bg-gray-dark{
+    background-color: #222d32;
 }
 .btn-float{
     border-radius: 50%;

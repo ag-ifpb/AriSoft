@@ -35,9 +35,9 @@ public class JogosCadastroController {
     }
     
     @RequestMapping(value="/adicionar", method = RequestMethod.POST)
-    public @ResponseBody String adicionarJogo (AdicionarJogoForm form){
+    public @ResponseBody String adicionarJogo (AdicionarJogoForm form, MultipartFile imagem){
         try{
-            jogoService.criarJogo(form, new byte[1]);
+            jogoService.criarJogo(form, imagem.getBytes());
             return "" + HttpStatus.ACCEPTED;
         }catch (Exception e){
             e.printStackTrace();

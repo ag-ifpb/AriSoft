@@ -2,12 +2,9 @@ package br.edu.ifpb.pos.webservice.business;
 
 import br.edu.ifpb.pos.core.dto.Jogos;
 import br.edu.ifpb.pos.core.entidades.Jogo;
-import br.edu.ifpb.pos.webservice.infraestrutura.interfaces.JogoService;
-import java.net.MalformedURLException;
-import java.net.URL;
+import br.edu.ifpb.pos.webservice.infraestrutura.interfaces.InfraestruturaService;
+import br.edu.ifpb.pos.webservice.infraestrutura.interfaces.InfraestruturaServiceSingleton;
 import java.rmi.RemoteException;
-import javax.xml.namespace.QName;
-import javax.xml.ws.Service;
 
 /**
  *
@@ -16,20 +13,20 @@ import javax.xml.ws.Service;
  */
 public class JogoBusiness {
 
-    private JogoService jogoService;
+    private InfraestruturaService infraestruturaService;
     private final int PAGE_SIZE = 5;
 
-    public JogoBusiness() throws MalformedURLException {
-        jogoService = recuperarJogoService();
+    public JogoBusiness(){
+        infraestruturaService = InfraestruturaServiceSingleton.getInstance();
     }
 
     public void salvarJogo(Jogo jogo) throws RemoteException {
         regrasParaSalvar(jogo);
-        jogoService.criar(jogo);
+        infraestruturaService.adicionarJogo(jogo);
     }
     
     public Jogos recuperarPagina (int page){
-        return jogoService.recuperarPagina(page, PAGE_SIZE);
+        return infraestruturaService.recuperarPaginaJogo(page, PAGE_SIZE);
     }
 
     private void regrasParaSalvar(Jogo jogo) throws RemoteException {
@@ -44,11 +41,6 @@ public class JogoBusiness {
         }
     }
 
-    private JogoService recuperarJogoService() throws MalformedURLException {
-        URL url = new URL("http://localhost:8081/jogo?wsdl");
-        QName qname = new QName("http://servicos.infraestrutura.pos.ifpb.edu.br/", "JogoService");
-        Service service = Service.create(url, qname);
-        return service.getPort(JogoService.class);
-    }
+    
 
 }
