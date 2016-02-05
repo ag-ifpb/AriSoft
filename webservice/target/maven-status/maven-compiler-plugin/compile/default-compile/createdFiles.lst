@@ -1,0 +1,4 @@
+br/edu/ifpb/pos/webservice/infraestrutura/interfaces/JogoService.class
+br/edu/ifpb/pos/webservice/services/MainService.class
+br/edu/ifpb/pos/webservice/Main.class
+br/edu/ifpb/pos/webservice/business/JogoBusiness.class

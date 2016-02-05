@@ -1,0 +1,42 @@
+<section class="content-header">
+    <h1>
+        <i class="fa fa-bomb"></i>
+        Novo jogo
+    </h1>                    
+</section>
+<section class="content">
+    <div class="box box-widget widget-user">
+        <div class="widget-user-header bg-black cover cadastro" style="background: url('/static/img/world-war-3.jpg') center center;" onclick="mudarImagemJogo()">            
+        </div>
+        <div class="widget-user-image">
+        </div>
+        <div class="box-footer">
+            <form id="cadastroJogoForm" enctype="multipart/form-data">
+                <input type="file" id="imagem" class="hidden" onchange="selecionouImagemJogo(this)" name="imagem"/>
+                <div class="form-group">
+                    <label for="objetivo">Objetivo</label>
+                    <input type="text" class="form-control" id="objetivo" placeholder="Qual o objetivo do jogo?" name="objetivo"/>
+                </div>                    
+                <div class="form-group">
+                    <label for="enredo">Enredo</label>
+                    <input type="text" class="form-control" id="enredo" placeholder="Qual o enredo do jogo?" name="enredo"/>
+                </div>                    
+                <div class="form-group">
+                    <label for="missao">Missão</label>
+                    <input type="text" class="form-control" id="missao" placeholder="Qual a missão do jogo?" name="missao"/>
+                </div>                    
+                <div class="form-group">
+                    <label for="local">Local</label>
+                    <input type="text" class="form-control" id="local" placeholder="Qual o local do jogo?" name="local"/>
+                </div>                    
+                <div class="form-group">
+                    <label for="horario">Horario</label>
+                    <input type="text" class="form-control" id="horario" placeholder="Qual o horario do jogo?" name="horario"/>
+                </div>                                    
+            </form>
+        </div>
+    </div>
+    <div class="btn btn-float left bg-verde-oliva" onclick="submitCadastroJogo()">
+        <i class="fa fa-check"></i>
+    </div>    
+</section>

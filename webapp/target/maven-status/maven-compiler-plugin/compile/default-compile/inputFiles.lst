@@ -1,0 +1,10 @@
+/home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/controller/forms/AdicionarJogoForm.java
+/home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/controller/jogos/JogosCadastroController.java
+/home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/Application.java
+/home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/utils/PageServerUtils.java
+/home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/controller/webservices/interfaces/AppWebServiceSingleton.java
+/home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/controller/services/JogoService.java
+/home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/controller/MainController.java
+/home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/controller/webservices/interfaces/AppWebService.java
+/home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/controller/jogos/JogosController.java
+/home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/controller/services/JogoServiceImpl.java
