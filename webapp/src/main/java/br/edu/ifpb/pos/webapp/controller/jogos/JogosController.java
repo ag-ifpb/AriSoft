@@ -34,4 +34,12 @@ public class JogosController {
         PageServerUtils.serve("fragments/lista_jogos", request, response);
     }
     
+    @RequestMapping("/jogo/{id}")
+    public @ResponseBody
+    void verJogo(HttpServletRequest request,
+            HttpServletResponse response, @PathVariable int id) throws IOException {
+        request.setAttribute("jogo", AppWebServiceSingleton.getInstance().verJogo(id));
+        PageServerUtils.serve("fragments/jogo", request, response);
+    }
+    
 }

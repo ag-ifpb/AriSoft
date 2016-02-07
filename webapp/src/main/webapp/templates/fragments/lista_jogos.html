@@ -1,33 +1,39 @@
-<div th:each="jogo : ${jogos}" class="">
-    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
-        <!-- Widget: user widget style 1 -->
-        <div class="box box-widget widget-user">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header cover bg-black" th:style="'background:url(/imagem/' + ${jogo.foto.id} + ') center;'">
-                <h3 class="widget-user-username" th:text="${jogo.objetivo}"></h3>
-            </div>
-            <div class="box-footer">
-                <div class="row">
-                    <div class="col-sm-4 border-right">
-                        <div class="description-block">
-                            <h5 class="description-header">3,200</h5>
-                            <span class="description-text">SALES</span>
-                        </div><!-- /.description-block -->
-                    </div><!-- /.col -->
-                    <div class="col-sm-4 border-right">
-                        <div class="description-block">
-                            <h5 class="description-header">13,000</h5>
-                            <span class="description-text">FOLLOWERS</span>
-                        </div><!-- /.description-block -->
-                    </div><!-- /.col -->
-                    <div class="col-sm-4">
-                        <div class="description-block">
-                            <h5 class="description-header">35</h5>
-                            <span class="description-text">PRODUCTS</span>
-                        </div><!-- /.description-block -->
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div>
-        </div><!-- /.widget-user -->
-    </div><!-- /.col -->
+<div th:each="jogo : ${jogos}" class="col-md-6 col-sm-12 col-lg-4 col-xs-12">
+    <!-- Widget: user widget style 1 -->
+    <div class="box box-widget widget-user link" th:onclick="'linkPaginaJogo('+${jogo.id}+')'">
+        <!-- Add the bg color to the header using any of the bg-* classes -->
+        <div class="widget-user-header cover bg-black" th:style="'background:url(/imagem/' + ${jogo.foto.id} + ') center;'">
+            <h3 class="widget-user-username" th:text="${jogo.missao}"></h3>
+        </div>
+        <div class="box-footer links">
+            <div class="row">
+                <div class="col-sm-4 border-right">
+                    <div class="description-block">
+                        <h5 class="description-header"><i class="fa fa-users"></i></h5>
+                        <span class="description-text">à implementar</span>
+                    </div><!-- /.description-block -->
+                </div><!-- /.col -->
+                <div class="col-sm-4">
+                    <div class="description-block">
+                        <h5 class="description-header"><i class="fa fa-camera"></i></h5>
+                        <span class="description-text">à implementar</span>
+                    </div><!-- /.description-block -->
+                </div><!-- /.col -->                
+                <div class="col-sm-4">
+                    <div class="description-block border-left">
+                        <h5 class="description-header"><i class="fa fa-calendar"></i></h5>
+                        <span class="description-text" th:text="${jogo.horario}"></span>
+                    </div><!-- /.description-block -->
+                </div><!-- /.col -->                
+            </div><!-- /.row -->
+        </div>
+    </div><!-- /.widget-user -->
+</div><!-- /.col -->
+<div th:if="${jogos.size() eq 5}" class="col-md-6 col-sm-12 col-lg-4 col-xs-12 load-more" onclick="carregarPaginaJogos()">
+    <div class="box box-widget widget-user link">
+        <!-- Add the bg color to the header using any of the bg-* classes -->
+        <div class="widget-user-header cover">
+            <h3 class="widget-user-username"><i class="fa fa-plus"></i> Carregar mais</h3>
+        </div>        
+    </div><!-- /.widget-user -->
 </div>

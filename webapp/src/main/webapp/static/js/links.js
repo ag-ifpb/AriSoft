@@ -16,8 +16,8 @@ function carregarPaginaJogos (){
         url: "/jogos/page/"+pagina,
         context: document.body
     }).done(function (data) {
-        var wrapper = $('.content-wrapper .content');
-        wrapper.empty();
+        $(".load-more").remove();
+        var wrapper = $('.content-wrapper .content');        
         wrapper.append(data);
         pagina++;
     });
@@ -25,6 +25,26 @@ function carregarPaginaJogos (){
 function linkCadastrarJogo() {
     $.ajax({
         url: "/jogo/cadastro",
+        context: document.body
+    }).done(function (data) {
+        var wrapper = $('.content-wrapper');
+        wrapper.empty();
+        wrapper.append(data);
+    });
+}
+function linkPaginaJogo(id) {
+    $.ajax({
+        url: "/jogos/jogo/"+id,
+        context: document.body
+    }).done(function (data) {
+        var wrapper = $('.content-wrapper');
+        wrapper.empty();
+        wrapper.append(data);
+    });
+}
+function linkMembros() {
+    $.ajax({
+        url: "/membros",
         context: document.body
     }).done(function (data) {
         var wrapper = $('.content-wrapper');

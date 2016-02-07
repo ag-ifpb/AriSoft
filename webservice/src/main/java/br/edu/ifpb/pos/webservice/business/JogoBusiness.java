@@ -25,6 +25,10 @@ public class JogoBusiness {
         infraestruturaService.adicionarJogo(jogo);
     }
     
+    public Jogo verJogo (long id){
+        return infraestruturaService.verJogo(id);
+    }
+    
     public Jogos recuperarPagina (int page){
         return infraestruturaService.recuperarPaginaJogo(page, PAGE_SIZE);
     }

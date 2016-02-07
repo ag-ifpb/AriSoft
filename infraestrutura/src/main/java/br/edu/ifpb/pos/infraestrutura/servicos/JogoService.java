@@ -22,6 +22,10 @@ public class JogoService {
         repositorio.save(jogo);
     }
 
+    public Jogo recuperar(long id){
+        return repositorio.findOne(id);
+    }
+    
     public Jogos recuperarPagina(int page, int pageSize) {
         Jogos lista = new Jogos();
         lista.setJogos(repositorio.findAll(new PageRequest(page, pageSize)).getContent());
