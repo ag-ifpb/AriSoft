@@ -1,6 +1,7 @@
 package br.edu.ifpb.pos.webservice.services;
 
 import br.edu.ifpb.pos.core.dto.Jogos;
+import br.edu.ifpb.pos.core.entidades.AlbumFotos;
 import br.edu.ifpb.pos.core.entidades.Foto;
 import br.edu.ifpb.pos.core.entidades.Jogo;
 import br.edu.ifpb.pos.core.entidades.JogoStatus;
@@ -35,12 +36,28 @@ public class MainService {
         return jogoBusiness.verJogo(id);
     }
     
+    public Jogo verJogoPeloToken (String token){
+        return jogoBusiness.verJogo(token);
+    }
+    
+    public void adicionarAlbumJogo (AlbumFotos album){
+        jogoBusiness.adicionarAlbumJogo(album);
+    }
+    
+    public AlbumFotos verAlbumJogo (long jogoId){
+        return InfraestruturaServiceSingleton.getInstance().verAlbumJogo(jogoId);
+    }
+    
     public void adicionarMembrosAoJogo (long idJogo, String... emails){
         jogoBusiness.adicionarMembrosAoJogo(idJogo, emails);
     }
     
     public Jogos recuperarPaginaJogo (int page){
         return jogoBusiness.recuperarPagina(page);
+    }
+    
+    public void confirmarPresencaMembro (String emailMembro, String token){
+        jogoBusiness.confirmarPresencaMembro(emailMembro, token);
     }
     
     public void cancelarJogo (long jogoId){

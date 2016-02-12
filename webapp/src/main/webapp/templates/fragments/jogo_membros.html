@@ -1,6 +1,6 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
-    atualizarNumeroMembros([[${membros != null ? membros.size() : 0}]]);
+    atualizarNumeroMembros([[${qtdMembros}]]);
             /*]]>*/
 </script>
 <div class="modal fade" id="adicionarMembro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -14,7 +14,7 @@
                 <div class="form-group">
                     <label>Membros</label>
                     <select class="form-control select2" multiple="multiple" data-placeholder="Selecione os membros" style="width: 100%;">
-                        <option th:each="membro : ${membrosCadastrados}" th:if="${membros == null or !#lists.contains(membros, membro)}" th:text="${membro.email}"></option>
+                        <option th:each="membro : ${membrosCadastrados}" th:if="${(membrosNaoConfirmados == null or !#lists.contains(membrosNaoConfirmados, membro))  and (membrosConfirmados == null or !#lists.contains(membrosConfirmados, membro))}" th:text="${membro.email}"></option>
                     </select>
                 </div><!-- /.form-group -->                   
             </div>
@@ -25,7 +25,21 @@
         </div>
     </div>
 </div>
-<div class="col-lg-3 col-xs-12 col-sm-6" th:each="membro : ${membros}">
+<h3 class="col-xs-12">Não confirmados:</h3>
+<div class="col-lg-3 col-xs-12 col-sm-6" th:each="membro : ${membrosNaoConfirmados}">
+    <div class="small-box bg-verde-oliva">
+        <div class="inner">
+            <h4><b th:text="${membro.nome}">Nome</b></h4>
+            <p th:text="${membro.email}">email@email.com</p>
+            <p th:text="${membro.telefone}">(83)99999-9999</p>
+        </div>
+        <div class="icon">
+            <i class="fa fa-user"></i>
+        </div>
+    </div>
+</div>
+<h3 class="col-xs-12">Confirmados:</h3>
+<div class="col-lg-3 col-xs-12 col-sm-6" th:each="membro : ${membrosConfirmados}">
     <div class="small-box bg-verde-oliva">
         <div class="inner">
             <h4><b th:text="${membro.nome}">Nome</b></h4>

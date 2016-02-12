@@ -22,6 +22,16 @@ function linkJogoMembros(id) {
         $(".select2").select2();
     });
 }
+function linkJogoAlbum(id) {
+    $.ajax({
+        url: "/jogos/jogo/"+id+"/album",
+        context: document.body
+    }).done(function (data) {
+        var wrapper = $('.game-infos');
+        wrapper.empty();
+        wrapper.append(data);
+    });
+}
 function linkJogoInfo(id) {
     $.ajax({
         url: "/jogos/jogo/"+id+"/info",

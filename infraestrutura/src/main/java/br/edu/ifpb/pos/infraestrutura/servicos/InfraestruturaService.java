@@ -1,6 +1,7 @@
 package br.edu.ifpb.pos.infraestrutura.servicos;
 
 import br.edu.ifpb.pos.core.dto.Jogos;
+import br.edu.ifpb.pos.core.entidades.AlbumFotos;
 import br.edu.ifpb.pos.core.entidades.Email;
 import br.edu.ifpb.pos.core.entidades.Foto;
 import br.edu.ifpb.pos.core.entidades.Jogo;
@@ -27,6 +28,8 @@ public class InfraestruturaService {
     private MembroService membroService;
     @Inject
     private EmailService emailService;
+    @Inject
+    private AlbumService albumService;
     
     public void adicionarJogo (Jogo jogo){
         jogoService.criar(jogo);
@@ -38,6 +41,10 @@ public class InfraestruturaService {
     
     public Jogo verJogo (long id){
         return jogoService.recuperar(id);
+    }
+    
+    public Jogo verJogoPeloToken (String token){
+        return jogoService.recuperar(token);
     }
     
     public void adicionarMembrosAoJogo (long idJogo, Membro... membros){
@@ -66,5 +73,13 @@ public class InfraestruturaService {
     
     public void enviarEmail (Email email){
         emailService.enviarEmail(email);
+    }
+    
+    public void criarAlbum (AlbumFotos album){
+        albumService.criarAlbum(album);
+    }
+    
+    public AlbumFotos verAlbumJogo (long jogoId){
+        return albumService.verAlbumJogo(jogoId);
     }
 }

@@ -1,9 +1,12 @@
 br/edu/ifpb/pos/infraestrutura/servicos/JogoService.class
 br/edu/ifpb/pos/infraestrutura/Main.class
+br/edu/ifpb/pos/infraestrutura/servicos/EmailService$EnviaEmail.class
+br/edu/ifpb/pos/infraestrutura/servicos/InfraestruturaService.class
+br/edu/ifpb/pos/infraestrutura/reposiorios/AlbumRepository.class
+br/edu/ifpb/pos/infraestrutura/reposiorios/MembroRepository.class
 br/edu/ifpb/pos/infraestrutura/servicos/EmailService.class
 br/edu/ifpb/pos/infraestrutura/servicos/MembroService.class
 br/edu/ifpb/pos/infraestrutura/reposiorios/FotoRepository.class
-br/edu/ifpb/pos/infraestrutura/servicos/InfraestruturaService.class
 br/edu/ifpb/pos/infraestrutura/servicos/FotoService.class
-br/edu/ifpb/pos/infraestrutura/reposiorios/MembroRepository.class
+br/edu/ifpb/pos/infraestrutura/servicos/AlbumService.class
 br/edu/ifpb/pos/infraestrutura/reposiorios/JogoRepository.class

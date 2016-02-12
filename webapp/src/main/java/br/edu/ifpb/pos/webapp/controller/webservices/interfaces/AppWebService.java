@@ -1,6 +1,7 @@
 package br.edu.ifpb.pos.webapp.controller.webservices.interfaces;
 
 import br.edu.ifpb.pos.core.dto.Jogos;
+import br.edu.ifpb.pos.core.entidades.AlbumFotos;
 import br.edu.ifpb.pos.core.entidades.Foto;
 import br.edu.ifpb.pos.core.entidades.Jogo;
 import br.edu.ifpb.pos.core.entidades.Membro;
@@ -19,9 +20,17 @@ public interface AppWebService {
     
     public Jogo verJogo (long id);
     
+    public Jogo verJogoPeloToken (String token);
+    
+    public void adicionarAlbumJogo (AlbumFotos album);
+    
+    public AlbumFotos verAlbumJogo (long jogoId);
+    
     public void adicionarMembrosAoJogo (long idJogo, String... emails);
     
     public Jogos recuperarPaginaJogo (int page);
+    
+    public void confirmarPresencaMembro (String emailMembro, String token);
     
     public void cancelarJogo (long jogoId);
     

@@ -61,17 +61,6 @@
                     </div><!-- /.container-fluid -->
                 </nav>
             </header>
-            <!--<aside class="main-sidebar bg-verde-oliva">
-                <section class="sidebar">
-                    <ul class="sidebar-menu">
-                        <li class="active">
-                            <a href="#" onclick="linkJogo()">
-                                <i class="fa fa-bomb"></i> <span>Jogos</span>
-                            </a>
-                        </li>
-                    </ul>
-                </section>
-            </aside>-->
 
             <div class="content-wrapper bg-gray-dark">
 
@@ -90,7 +79,14 @@
         <script src="/static/js/cadastro_jogo.js"></script>
         <script src="/static/js/links.js"></script>
         <script src="/static/js/cadastro_membro.js"></script>
-        <script src="/static/js/select2.full.min.js"></script>
+        <script src="/static/js/select2.full.min.js"></script>        
         <script>linkJogo();</script>
+        <div th:if="${param.id != null or jogoId != null}">
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                linkPaginaJogo([[${param.id != null ? param.id : jogoId}]]);
+                /*]]>*/
+            </script>
+        </div>                            
     </body>
 </html>

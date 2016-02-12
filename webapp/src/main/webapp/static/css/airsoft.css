@@ -72,3 +72,7 @@
 .game-actions{
     padding:0px 15px;    
 }
+.jogo-imagens > img{
+    width:100%;
+    border: 3px solid black;
+}

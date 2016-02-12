@@ -73,3 +73,28 @@ function cancelarJogo(id){
         linkPaginaJogo(id);
     });
 }
+function ativarInputImagens (){
+    $('#addImagens').click();
+}
+function addImagensJogo (input, id){
+    var formData = new FormData();
+    $.each(input.files, function (i, file){
+        formData.append('files['+i+']', file);
+    });
+    $.ajax({
+        url: "/conf/jogo/"+id+"/addalbum",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (res) {
+            if (res === '202') {
+                linkJogoAlbum(id);
+            }
+            else alert(res);
+        },
+        error: function () {
+            alert("deu erro");
+        }
+    });
+}

@@ -1,6 +1,7 @@
 package br.edu.ifpb.pos.webservice.infraestrutura.interfaces;
 
 import br.edu.ifpb.pos.core.dto.Jogos;
+import br.edu.ifpb.pos.core.entidades.AlbumFotos;
 import br.edu.ifpb.pos.core.entidades.Email;
 import br.edu.ifpb.pos.core.entidades.Foto;
 import br.edu.ifpb.pos.core.entidades.Jogo;
@@ -22,6 +23,8 @@ public interface InfraestruturaService {
     
     public Jogo verJogo (long id);
     
+    public Jogo verJogoPeloToken (String token);
+    
     public void adicionarMembrosAoJogo (long idJogo, Membro... membros);
     
     public Jogos recuperarPaginaJogo (int page, int pageSize);
@@ -35,5 +38,9 @@ public interface InfraestruturaService {
     public List<Membro> verTodosMembros ();
     
     public void enviarEmail (Email email);
+    
+    public void criarAlbum (AlbumFotos album);
+    
+    public AlbumFotos verAlbumJogo (long jogoId);
     
 }

@@ -1,5 +1,8 @@
 package br.edu.ifpb.pos.webapp.controller.jogos;
 
+import br.edu.ifpb.pos.core.entidades.AlbumFotos;
+import br.edu.ifpb.pos.core.entidades.Jogo;
+import br.edu.ifpb.pos.webapp.controller.services.JogoService;
 import br.edu.ifpb.pos.webapp.controller.services.MembroService;
 import br.edu.ifpb.pos.webapp.controller.webservices.interfaces.AppWebServiceSingleton;
 import br.edu.ifpb.pos.webapp.utils.PageServerUtils;
@@ -23,6 +26,8 @@ public class JogosController {
 
     @Inject
     private MembroService membroService;
+    @Inject
+    private JogoService jogoService;
     
     @RequestMapping("")
     public @ResponseBody
@@ -52,7 +57,10 @@ public class JogosController {
     void verMembrosJogo(HttpServletRequest request,
             HttpServletResponse response, @PathVariable int id) throws IOException {
         request.setAttribute("membrosCadastrados", membroService.verTodosMembros());
-        request.setAttribute("membros", AppWebServiceSingleton.getInstance().verJogo(id).getMembrosNaoConfirmados());
+        Jogo jogo = AppWebServiceSingleton.getInstance().verJogo(id);
+        request.setAttribute("membrosNaoConfirmados", jogo.getMembrosNaoConfirmados());
+        request.setAttribute("membrosConfirmados", jogo.getMembrosConfirmados());
+        request.setAttribute("qtdMembros", jogo.qtdMembros());
         request.setAttribute("jogoId", id);
         PageServerUtils.serve("fragments/jogo_membros", request, response);
     }
@@ -64,5 +72,27 @@ public class JogosController {
         request.setAttribute("jogo", AppWebServiceSingleton.getInstance().verJogo(id));
         PageServerUtils.serve("fragments/jogo_info", request, response);
     }
+    
+    @RequestMapping("/jogo/{id}/album")
+    public @ResponseBody
+    void verAlbumJogo(HttpServletRequest request,
+            HttpServletResponse response, @PathVariable int id) throws IOException {
+        request.setAttribute("jogo", AppWebServiceSingleton.getInstance().verJogo(id));
+        AlbumFotos album = AppWebServiceSingleton.getInstance().verAlbumJogo(id);
+        request.setAttribute("fotos", album != null ? album.getFotos() : null);
+        PageServerUtils.serve("fragments/jogo_album", request, response);
+    }
+    
+    @RequestMapping("/jogo/confirmar/{token}")
+    public @ResponseBody
+    void confirmarPresencaMembro(HttpServletRequest request,
+            HttpServletResponse response, @PathVariable String token) throws IOException {
+        String email = (String) request.getParameter("email");
+        jogoService.confirmarPresencaMembro(email, token);
+        request.setAttribute("jogoId", AppWebServiceSingleton.getInstance().verJogoPeloToken(token).getId());
+        PageServerUtils.serve("index", request, response);
+    }
+    
+    
     
 }

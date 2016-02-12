@@ -28,7 +28,7 @@
     </h4>     
     <p th:text="${jogo.status.name()}"></p>
 </div>
-<div class="game-actions row">
+<div class="game-actions row" th:if="${jogo.status.name() == 'ATIVO'}">
     <button class="col-xs-6 btn btn-danger" th:onclick="'cancelarJogo('+${jogo.id}+')'">Cancelar</button>
     <button class="col-xs-6 btn btn-success" th:onclick="'encerrarJogo('+${jogo.id}+')'">Encerrar</button>
 </div>

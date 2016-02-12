@@ -1,7 +1,9 @@
 package br.edu.ifpb.pos.webservice.business;
 
 import br.edu.ifpb.pos.core.dto.Jogos;
+import br.edu.ifpb.pos.core.entidades.AlbumFotos;
 import br.edu.ifpb.pos.core.entidades.Email;
+import br.edu.ifpb.pos.core.entidades.Foto;
 import br.edu.ifpb.pos.core.entidades.Jogo;
 import br.edu.ifpb.pos.core.entidades.JogoStatus;
 import br.edu.ifpb.pos.core.entidades.Membro;
@@ -34,6 +36,10 @@ public class JogoBusiness {
     public Jogo verJogo(long id) {
         return infraestruturaService.verJogo(id);
     }
+    
+    public Jogo verJogo(String token) {
+        return infraestruturaService.verJogoPeloToken(token);
+    }
 
     public void adicionarMembrosAoJogo(long idJogo, String... emails) {
         List<Membro> membros = new ArrayList<>();
@@ -45,7 +51,7 @@ public class JogoBusiness {
                     membros.add(membro);
                     infraestruturaService.enviarEmail(new Email().comAssunto("Você foi adicionado a um novo jogo")
                             .comDestinatario(email).comMensagem("Você foi convidado a participar de um novo jogo"
-                                    + " para confirmar sua participação acesse o link: http://localhost:8080/jogo/confirmar/"+jogo.getToken()));
+                                    + " para confirmar sua participação acesse o link: http://localhost:8080/jogos/jogo/confirmar/" + jogo.getToken()+"?email="+email));
                 }
             }
             Membro[] arrayMembros = new Membro[membros.size()];
@@ -56,38 +62,71 @@ public class JogoBusiness {
     public Jogos recuperarPagina(int page) {
         return infraestruturaService.recuperarPaginaJogo(page, PAGE_SIZE);
     }
+    
+    public void adicionarAlbumJogo (AlbumFotos album){
+        infraestruturaService.criarAlbum(album);
+    }
+    
+    public void confirmarPresencaMembro (String email, String token){
+        Jogo jogo = infraestruturaService.verJogoPeloToken(token);
+        Membro membro = infraestruturaService.verMembro(email);
+        if (membro != null){
+            if (jogo.getMembrosNaoConfirmados().contains(membro)){
+                jogo.getMembrosNaoConfirmados().remove(membro);
+                if (jogo.getMembrosConfirmados() == null)
+                    jogo.setMembrosConfirmados(new ArrayList<>());
+                jogo.getMembrosConfirmados().add(membro);
+                infraestruturaService.atualizarJogo(jogo);
+            }
+        }
+    }
 
     public void cancelarJogo(long jogoId) {
         Jogo jogo = verJogo(jogoId);
         jogo.setStatus(JogoStatus.CANCELADO);
         infraestruturaService.atualizarJogo(jogo);
-        enviarEmailMudancaStatus(jogo, JogoStatus.CANCELADO);
+        new EnviaEmailThread(jogo, JogoStatus.CANCELADO).start();
     }
 
     public void encerrarJogo(long jogoId) {
         Jogo jogo = verJogo(jogoId);
         jogo.setStatus(JogoStatus.ENCERRADO);
         infraestruturaService.atualizarJogo(jogo);
-        enviarEmailMudancaStatus(jogo, JogoStatus.ENCERRADO);
+        new EnviaEmailThread(jogo, JogoStatus.ENCERRADO).start();
     }
-    
-    private void enviarEmailMudancaStatus (Jogo jogo, JogoStatus status){
-        String mensagem = "", assunto = "";
-        if (status.equals(JogoStatus.CANCELADO)){
-            mensagem = "Um jogo que você foi convidado foi cancelado. Acesse o link para visualizá-lo: "
-                    + "http://localhost:8080/jogo/"+jogo.getId();
-            assunto = "Jogo cancelado";
+
+    private class EnviaEmailThread extends Thread {
+
+        private Jogo jogo;
+        private JogoStatus status;
+
+        public EnviaEmailThread(Jogo jogo, JogoStatus status) {
+            this.jogo = jogo;
+            this.status = status;
         }
-        if (status.equals(JogoStatus.ENCERRADO)){
-            mensagem = "Um jogo que você foi convidado foi encerrado. Acesse o link para visualizá-lo: "
-                    + "http://localhost:8080/jogo/"+jogo.getId();
-            assunto = "Jogo encerrado";
-        }
-        for (Membro membro : jogo.getMembrosConfirmados()){
-            infraestruturaService.enviarEmail(new Email().comAssunto(assunto).comMensagem(mensagem).comDestinatario(membro.getEmail()));
-        }
-        for (Membro membro : jogo.getMembrosNaoConfirmados()){
-            infraestruturaService.enviarEmail(new Email().comAssunto(assunto).comMensagem(mensagem).comDestinatario(membro.getEmail()));
+        
+        public void run() {
+            String mensagem = "", assunto = "";
+            if (status.equals(JogoStatus.CANCELADO)) {
+                mensagem = "Um jogo que você foi convidado foi cancelado. Acesse o link para visualizá-lo: "
+                        + "http://localhost:8080/?id=" + jogo.getId();
+                assunto = "Jogo cancelado";
+            }
+            if (status.equals(JogoStatus.ENCERRADO)) {
+                mensagem = "Um jogo que você foi convidado foi encerrado. Acesse o link para visualizá-lo: "
+                        + "http://localhost:8080/?id=" + jogo.getId();
+                assunto = "Jogo encerrado";
+            }
+            if (jogo.getMembrosConfirmados() != null) {
+                for (Membro membro : jogo.getMembrosConfirmados()) {
+                    infraestruturaService.enviarEmail(new Email().comAssunto(assunto).comMensagem(mensagem).comDestinatario(membro.getEmail()));
+                }
+            }
+            if (jogo.getMembrosNaoConfirmados() != null) {
+                for (Membro membro : jogo.getMembrosNaoConfirmados()) {
+                    infraestruturaService.enviarEmail(new Email().comAssunto(assunto).comMensagem(mensagem).comDestinatario(membro.getEmail()));
+                }
+            }
         }
     }
 

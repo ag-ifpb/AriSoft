@@ -28,6 +28,10 @@ public class JogoService {
         return repositorio.findOne(id);
     }
     
+    public Jogo recuperar (String token){
+        return repositorio.findByToken(token);
+    }
+    
     public void adicionarMembros (long id, Membro... membros){
         Jogo jogo = repositorio.findOne(id);
         jogo.getMembrosNaoConfirmados().addAll(Lists.newArrayList(membros));

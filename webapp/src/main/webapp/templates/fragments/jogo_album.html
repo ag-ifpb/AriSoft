@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="jogo-imagens col-xs-12 col-sm-6" th:each="foto : ${fotos}">
+        <img th:src="'/imagem/'+${foto.id}" />
+    </div>
+</div>
+<div th:if="${jogo.status.name() != 'ENCERRADO'}">
+    <div class="alert alert-info alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-info"></i> Alert!</h4>
+        Só é possível adicionar fotos ao encerrar o jogo
+    </div>
+</div>
+<a th:if="${jogo.status.name() == 'ENCERRADO' and (fotos == null or fotos.size() == 0)}" class="btn bg-verde-oliva adicionar" onclick="ativarInputImagens()">Adicionar fotos</a>
+<input class="postAttInput hidden" id="addImagens" th:onchange="'addImagensJogo (this,'+${jogo.id}+')'" type="file" multiple="" accept=".jpg, .gif, .png" />

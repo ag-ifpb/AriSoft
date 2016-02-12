@@ -1,4 +1,5 @@
 br/edu/ifpb/pos/webservice/infraestrutura/interfaces/InfraestruturaServiceSingleton.class
+br/edu/ifpb/pos/webservice/business/JogoBusiness$EnviaEmailThread.class
 br/edu/ifpb/pos/webservice/services/MainService.class
 br/edu/ifpb/pos/webservice/utils/GenerateCodeUtils.class
 br/edu/ifpb/pos/webservice/infraestrutura/interfaces/InfraestruturaService.class

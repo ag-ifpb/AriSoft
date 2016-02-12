@@ -1,5 +1,6 @@
 package br.edu.ifpb.pos.webapp.controller.jogos;
 
+import br.edu.ifpb.pos.webapp.controller.forms.MultiplasImagensForm;
 import br.edu.ifpb.pos.webapp.controller.services.JogoService;
 import javax.inject.Inject;
 import org.springframework.http.HttpStatus;
@@ -49,5 +50,17 @@ public class JogoConfiguracoesController {
             return ""+e.getMessage();
         }
     }
+    
+    @RequestMapping("/addalbum")
+    public @ResponseBody String addAlbum (MultiplasImagensForm files, @PathVariable long id){
+        try{
+            jogoService.addAlbum(id, files.getFiles());
+            return ""+HttpStatus.ACCEPTED;
+        }catch (Exception e){
+            return ""+e.getMessage();
+        }
+    }
+    
+    
     
 }

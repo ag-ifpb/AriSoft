@@ -16,13 +16,28 @@ public class EmailService {
 
     @Inject
     private MailSender sender;
-    
-    public void enviarEmail (Email email){
-        SimpleMailMessage mailMessage=new SimpleMailMessage();
-        mailMessage.setTo(email.getDestinatario());
-        mailMessage.setSubject(email.getAssunto());
-        mailMessage.setText(email.getMensagem());
-        sender.send(mailMessage);
+
+    public void enviarEmail(Email email) {
+        new EnviaEmail(email, sender).start();
     }
-    
+
+    public class EnviaEmail extends Thread {
+
+        private Email email;
+        private MailSender sender;
+
+        public EnviaEmail(Email email, MailSender sender) {
+            this.email = email;
+            this.sender = sender;
+        }
+        
+        public void run() {
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+            mailMessage.setTo(email.getDestinatario());
+            mailMessage.setSubject(email.getAssunto());
+            mailMessage.setText(email.getMensagem());
+            sender.send(mailMessage);
+        }
+    }
+
 }
