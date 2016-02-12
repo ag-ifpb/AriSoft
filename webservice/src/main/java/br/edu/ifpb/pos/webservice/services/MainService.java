@@ -3,6 +3,7 @@ package br.edu.ifpb.pos.webservice.services;
 import br.edu.ifpb.pos.core.dto.Jogos;
 import br.edu.ifpb.pos.core.entidades.Foto;
 import br.edu.ifpb.pos.core.entidades.Jogo;
+import br.edu.ifpb.pos.core.entidades.JogoStatus;
 import br.edu.ifpb.pos.core.entidades.Membro;
 import br.edu.ifpb.pos.webservice.business.JogoBusiness;
 import br.edu.ifpb.pos.webservice.infraestrutura.interfaces.InfraestruturaServiceSingleton;
@@ -34,8 +35,20 @@ public class MainService {
         return jogoBusiness.verJogo(id);
     }
     
+    public void adicionarMembrosAoJogo (long idJogo, String... emails){
+        jogoBusiness.adicionarMembrosAoJogo(idJogo, emails);
+    }
+    
     public Jogos recuperarPaginaJogo (int page){
         return jogoBusiness.recuperarPagina(page);
+    }
+    
+    public void cancelarJogo (long jogoId){
+        jogoBusiness.cancelarJogo(jogoId);
+    }
+    
+    public void encerrarJogo (long jogoId){
+        jogoBusiness.encerrarJogo(jogoId);
     }
     
     public Foto verFoto (long id){

@@ -28,4 +28,16 @@ public class JogoService{
         AppWebServiceSingleton.getInstance().criarJogo(jogo);
     }
     
+    public void adicionarMembros (long idJogo, String emails){
+        AppWebServiceSingleton.getInstance().adicionarMembrosAoJogo(idJogo, emails.split(","));
+    }
+    
+    public void encerrarJogo (long jogoId){
+        AppWebServiceSingleton.getInstance().encerrarJogo(jogoId);
+    }
+    
+    public void cancelarJogo (long jogoId){
+        AppWebServiceSingleton.getInstance().cancelarJogo(jogoId);
+    }
+    
 }

@@ -19,7 +19,13 @@ public interface AppWebService {
     
     public Jogo verJogo (long id);
     
+    public void adicionarMembrosAoJogo (long idJogo, String... emails);
+    
     public Jogos recuperarPaginaJogo (int page);
+    
+    public void cancelarJogo (long jogoId);
+    
+    public void encerrarJogo (long jogoId);
     
     public Foto verFoto (long id);
     

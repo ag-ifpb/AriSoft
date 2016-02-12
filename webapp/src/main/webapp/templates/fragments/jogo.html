@@ -1,15 +1,15 @@
 <section class="content">
     <div class="box box-widget widget-user">
-        <div class="widget-user-header bg-black cover" th:style="'background:url(/imagem/' + ${jogo.foto.id} + ') center;'">            
+        <div class="widget-user-header bg-black cover link" th:onclick="'linkJogoInfo('+${jogo.id}+')'" th:style="'background:url(/imagem/' + ${jogo.foto.id} + ') center;'">            
         </div>
         <div class="widget-user-image">
         </div>
         <div class="box-footer links">
             <div class="row">
                 <div class="col-sm-4 border-right">
-                    <div class="description-block">
+                    <div class="description-block link" th:onclick="'linkJogoMembros('+ ${jogo.id} +')'">
                         <h5 class="description-header"><i class="fa fa-users"></i></h5>
-                        <span class="description-text">à implementar</span>
+                        <span id="numeroMembros" class="description-text" th:text="${jogo.qtdMembros()}">à implementar</span>
                     </div><!-- /.description-block -->
                 </div><!-- /.col -->
                 <div class="col-sm-4">
@@ -26,29 +26,12 @@
                 </div><!-- /.col -->                
             </div><!-- /.row -->
         </div>
-        <div class="box-footer game-info">
-            <h4 class="">
-                Missão:                
-            </h4>     
-            <p th:text="${jogo.missao}"></p>
-        </div>
-        <div class="box-footer game-info">
-            <h4 class="">
-                Objetivo:                
-            </h4>     
-            <p th:text="${jogo.objetivo}"></p>
-        </div>
-        <div class="box-footer game-info">
-            <h4 class="">
-                Enredo:
-            </h4>     
-            <p th:text="${jogo.enredo}"></p>
-        </div>
-        <div class="box-footer game-info">
-            <h4 class="">
-                Local:
-            </h4>     
-            <p th:text="${jogo.local}"></p>
-        </div>
+        <div class="game-infos">
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                linkJogoInfo([[${jogo.id}]]);
+                /*]]>*/
+            </script>
+        </div>        
     </div>
 </section>

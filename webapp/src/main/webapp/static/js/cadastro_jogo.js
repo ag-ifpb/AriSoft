@@ -33,3 +33,43 @@ function submitCadastroJogo() {
         }
     });
 }
+function adicionarMembrosAoJogo (id){
+    var choices = "";
+    $(".select2-selection__choice").each(function (){
+        choices += $(this).attr("title")+",";
+    });
+    var formData = new FormData();
+    formData.append('emails', choices);
+    $.ajax({
+        url: "/conf/jogo/"+id+"/membros/adicionar",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (res) {
+            if (res === '202') {
+                linkJogoMembros(id);
+            }
+            else alert(res);
+        },
+        error: function () {
+            alert("deu erro");
+        }
+    });
+}
+function encerrarJogo(id){
+    $.ajax({
+        url: "/conf/jogo/"+id+"/encerrar",
+        context: document.body
+    }).done(function (data) {
+        linkPaginaJogo(id);
+    });
+}
+function cancelarJogo(id){
+    $.ajax({
+        url: "/conf/jogo/"+id+"/cancelar",
+        context: document.body
+    }).done(function (data) {
+        linkPaginaJogo(id);
+    });
+}

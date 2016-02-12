@@ -11,6 +11,28 @@ function linkJogo() {
         carregarPaginaJogos();
     });
 }
+function linkJogoMembros(id) {
+    $.ajax({
+        url: "/jogos/jogo/"+id+"/membros",
+        context: document.body
+    }).done(function (data) {
+        var wrapper = $('.game-infos');
+        wrapper.empty();
+        wrapper.append(data);
+        $(".select2").select2();
+    });
+}
+function linkJogoInfo(id) {
+    $.ajax({
+        url: "/jogos/jogo/"+id+"/info",
+        context: document.body
+    }).done(function (data) {
+        var wrapper = $('.game-infos');
+        wrapper.empty();
+        wrapper.append(data);
+    });
+}
+
 function carregarPaginaJogos (){
     $.ajax({
         url: "/jogos/page/"+pagina,

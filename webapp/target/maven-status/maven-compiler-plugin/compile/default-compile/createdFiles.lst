@@ -6,6 +6,7 @@ br/edu/ifpb/pos/webapp/controller/webservices/interfaces/AppWebServiceSingleton.
 br/edu/ifpb/pos/webapp/controller/jogos/JogosController.class
 br/edu/ifpb/pos/webapp/controller/services/JogoService.class
 br/edu/ifpb/pos/webapp/controller/services/MembroService.class
+br/edu/ifpb/pos/webapp/controller/jogos/JogoConfiguracoesController.class
 br/edu/ifpb/pos/webapp/controller/membros/MembrosController.class
 br/edu/ifpb/pos/webapp/controller/fotos/FotoController.class
 br/edu/ifpb/pos/webapp/utils/PageServerUtils.class

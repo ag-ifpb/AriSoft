@@ -1,0 +1,40 @@
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    atualizarNumeroMembros([[${membros != null ? membros.size() : 0}]]);
+            /*]]>*/
+</script>
+<div class="modal fade" id="adicionarMembro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Novo membro</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Membros</label>
+                    <select class="form-control select2" multiple="multiple" data-placeholder="Selecione os membros" style="width: 100%;">
+                        <option th:each="membro : ${membrosCadastrados}" th:if="${membros == null or !#lists.contains(membros, membro)}" th:text="${membro.email}"></option>
+                    </select>
+                </div><!-- /.form-group -->                   
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" th:onclick="'adicionarMembrosAoJogo ('+${jogoId}+')'">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3 col-xs-12 col-sm-6" th:each="membro : ${membros}">
+    <div class="small-box bg-verde-oliva">
+        <div class="inner">
+            <h4><b th:text="${membro.nome}">Nome</b></h4>
+            <p th:text="${membro.email}">email@email.com</p>
+            <p th:text="${membro.telefone}">(83)99999-9999</p>
+        </div>
+        <div class="icon">
+            <i class="fa fa-user"></i>
+        </div>
+    </div>
+</div>
+<a class="btn bg-verde-oliva adicionar" data-toggle="modal" data-target="#adicionarMembro">Adicionar membro</a>

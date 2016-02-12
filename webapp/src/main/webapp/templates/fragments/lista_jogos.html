@@ -10,7 +10,7 @@
                 <div class="col-sm-4 border-right">
                     <div class="description-block">
                         <h5 class="description-header"><i class="fa fa-users"></i></h5>
-                        <span class="description-text">à implementar</span>
+                        <span class="description-text" th:text="${jogo.qtdMembros()}">à implementar</span>
                     </div><!-- /.description-block -->
                 </div><!-- /.col -->
                 <div class="col-sm-4">
@@ -29,7 +29,7 @@
         </div>
     </div><!-- /.widget-user -->
 </div><!-- /.col -->
-<div th:if="${jogos.size() eq 5}" class="col-md-6 col-sm-12 col-lg-4 col-xs-12 load-more" onclick="carregarPaginaJogos()">
+<div th:if="${jogos != null and jogos.size() eq 5}" class="col-md-6 col-sm-12 col-lg-4 col-xs-12 load-more" onclick="carregarPaginaJogos()">
     <div class="box box-widget widget-user link">
         <!-- Add the bg color to the header using any of the bg-* classes -->
         <div class="widget-user-header cover">

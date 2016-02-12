@@ -9,4 +9,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface MembroRepository extends CrudRepository<Membro, Long>{
 
+    public Membro findByEmail (String email);
+    
 }

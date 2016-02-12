@@ -12,15 +12,19 @@
     <version>1.0-SNAPSHOT</version>
     
     <packaging>pom</packaging>
+    
+    <properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
     <modules>
         <module>infraestrutura</module>
         <module>webapp</module>
         <module>webservice</module>
         <module>core</module>
     </modules>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
     
     <name>Airsoft</name>
     

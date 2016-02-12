@@ -64,3 +64,11 @@
 .game-info p{
     color:gray;
 }
+.btn.adicionar{
+    width:100%;
+    text-align: center;
+    color:white !important;
+}
+.game-actions{
+    padding:0px 15px;    
+}

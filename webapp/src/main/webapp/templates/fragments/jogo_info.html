@@ -1,0 +1,34 @@
+<div class="box-footer game-info">
+    <h4 class="">
+        Missão:                
+    </h4>     
+    <p th:text="${jogo.missao}"></p>
+</div>
+<div class="box-footer game-info">
+    <h4 class="">
+        Objetivo:                
+    </h4>     
+    <p th:text="${jogo.objetivo}"></p>
+</div>
+<div class="box-footer game-info">
+    <h4 class="">
+        Enredo:
+    </h4>     
+    <p th:text="${jogo.enredo}"></p>
+</div>
+<div class="box-footer game-info">
+    <h4 class="">
+        Local:
+    </h4>     
+    <p th:text="${jogo.local}"></p>
+</div>
+<div class="box-footer game-info">
+    <h4 class="">
+        Status:
+    </h4>     
+    <p th:text="${jogo.status.name()}"></p>
+</div>
+<div class="game-actions row">
+    <button class="col-xs-6 btn btn-danger" th:onclick="'cancelarJogo('+${jogo.id}+')'">Cancelar</button>
+    <button class="col-xs-6 btn btn-success" th:onclick="'encerrarJogo('+${jogo.id}+')'">Encerrar</button>
+</div>

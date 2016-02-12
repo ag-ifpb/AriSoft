@@ -2,7 +2,9 @@ package br.edu.ifpb.pos.infraestrutura.servicos;
 
 import br.edu.ifpb.pos.core.dto.Jogos;
 import br.edu.ifpb.pos.core.entidades.Jogo;
+import br.edu.ifpb.pos.core.entidades.Membro;
 import br.edu.ifpb.pos.infraestrutura.reposiorios.JogoRepository;
+import com.google.common.collect.Lists;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +26,12 @@ public class JogoService {
 
     public Jogo recuperar(long id){
         return repositorio.findOne(id);
+    }
+    
+    public void adicionarMembros (long id, Membro... membros){
+        Jogo jogo = repositorio.findOne(id);
+        jogo.getMembrosNaoConfirmados().addAll(Lists.newArrayList(membros));
+        repositorio.save(jogo);
     }
     
     public Jogos recuperarPagina(int page, int pageSize) {

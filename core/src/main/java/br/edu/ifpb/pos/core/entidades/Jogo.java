@@ -1,9 +1,10 @@
 package br.edu.ifpb.pos.core.entidades;
 
-import java.time.LocalTime;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -31,17 +32,46 @@ public class Jogo {
     private String missao;
     private String local;
     private String horario;
+    private String token;
+    @Enumerated(EnumType.STRING)
+    private JogoStatus status;
     @OneToOne (cascade = CascadeType.ALL)
     private Foto foto;
     @ManyToMany (fetch = FetchType.EAGER)
-    private List<Membro> membros;
+    private List<Membro> membrosNaoConfirmados;
+    @ManyToMany (fetch = FetchType.EAGER)
+    private List<Membro> membrosConfirmados;
 
-    public List<Membro> getMembros() {
-        return membros;
+    public List<Membro> getMembrosConfirmados() {
+        return membrosConfirmados;
     }
 
-    public void setMembros(List<Membro> membros) {
-        this.membros = membros;
+    public void setMembrosConfirmados(List<Membro> membrosConfirmados) {
+        this.membrosConfirmados = membrosConfirmados;
+    }
+    
+    public JogoStatus getStatus() {
+        return status;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void setStatus(JogoStatus status) {
+        this.status = status;
+    }
+
+    public List<Membro> getMembrosNaoConfirmados() {
+        return membrosNaoConfirmados;
+    }
+
+    public void setMembrosNaoConfirmados(List<Membro> membrosNaoConfirmados) {
+        this.membrosNaoConfirmados = membrosNaoConfirmados;
     }
 
     public long getId() {
@@ -98,6 +128,13 @@ public class Jogo {
 
     public void setFoto(Foto foto) {
         this.foto = foto;
+    }
+    
+    public int qtdMembros (){
+        int qtd = 0;
+        qtd += membrosConfirmados != null ? membrosConfirmados.size() : 0;
+        qtd += membrosNaoConfirmados != null ? membrosNaoConfirmados.size() : 0;
+        return qtd;
     }
     
 }

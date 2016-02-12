@@ -1,8 +1,10 @@
 package br.edu.ifpb.pos.webapp.controller.jogos;
 
+import br.edu.ifpb.pos.webapp.controller.services.MembroService;
 import br.edu.ifpb.pos.webapp.controller.webservices.interfaces.AppWebServiceSingleton;
 import br.edu.ifpb.pos.webapp.utils.PageServerUtils;
 import java.io.IOException;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/jogos")
 public class JogosController {
 
+    @Inject
+    private MembroService membroService;
+    
     @RequestMapping("")
     public @ResponseBody
     void index(HttpServletRequest request,
@@ -40,6 +45,24 @@ public class JogosController {
             HttpServletResponse response, @PathVariable int id) throws IOException {
         request.setAttribute("jogo", AppWebServiceSingleton.getInstance().verJogo(id));
         PageServerUtils.serve("fragments/jogo", request, response);
+    }
+    
+    @RequestMapping("/jogo/{id}/membros")
+    public @ResponseBody
+    void verMembrosJogo(HttpServletRequest request,
+            HttpServletResponse response, @PathVariable int id) throws IOException {
+        request.setAttribute("membrosCadastrados", membroService.verTodosMembros());
+        request.setAttribute("membros", AppWebServiceSingleton.getInstance().verJogo(id).getMembrosNaoConfirmados());
+        request.setAttribute("jogoId", id);
+        PageServerUtils.serve("fragments/jogo_membros", request, response);
+    }
+    
+    @RequestMapping("/jogo/{id}/info")
+    public @ResponseBody
+    void verInfosJogo(HttpServletRequest request,
+            HttpServletResponse response, @PathVariable int id) throws IOException {
+        request.setAttribute("jogo", AppWebServiceSingleton.getInstance().verJogo(id));
+        PageServerUtils.serve("fragments/jogo_info", request, response);
     }
     
 }

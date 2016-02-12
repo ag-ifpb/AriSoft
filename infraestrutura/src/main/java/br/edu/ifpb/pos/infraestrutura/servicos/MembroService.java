@@ -22,6 +22,10 @@ public class MembroService {
         repositorio.save(membro);
     }
     
+    public Membro verMembro (String email){
+        return repositorio.findByEmail(email);
+    }
+    
     public List<Membro> verTodosMembros (){
         return Lists.newArrayList(repositorio.findAll());
     }

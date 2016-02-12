@@ -2,4 +2,6 @@ br/edu/ifpb/pos/core/entidades/Jogo.class
 br/edu/ifpb/pos/core/dto/Jogos.class
 br/edu/ifpb/pos/core/entidades/AlbumFotos.class
 br/edu/ifpb/pos/core/entidades/Membro.class
+br/edu/ifpb/pos/core/entidades/Email.class
 br/edu/ifpb/pos/core/entidades/Foto.class
+br/edu/ifpb/pos/core/entidades/JogoStatus.class

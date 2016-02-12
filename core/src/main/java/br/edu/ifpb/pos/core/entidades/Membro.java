@@ -1,5 +1,6 @@
 package br.edu.ifpb.pos.core.entidades;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ public class Membro {
     @GeneratedValue
     private long id;
     private String nome;
+    @Column(unique = true)
     private String email;
     private String telefone;
 
@@ -52,5 +54,22 @@ public class Membro {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Membro other = (Membro) obj;
+        if ((this.email == null) ? (other.email != null) : !this.email.equals(other.email)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
     
 }
