@@ -12,7 +12,8 @@ import javax.inject.Named;
 import javax.jws.WebService;
 
 /**
- *
+ * Classe que representa o serviço que disponibiliza as funcionalidades básicas.
+ * 
  * @author douglasgabriel
  * @version 0.1
  */
@@ -30,56 +31,115 @@ public class InfraestruturaService {
     private EmailService emailService;
     @Inject
     private AlbumService albumService;
-    
-    public void adicionarJogo (Jogo jogo){
+
+    /**
+     * Adiciona um jogo ao repositório.
+     */
+    public void adicionarJogo(Jogo jogo) {
         jogoService.criar(jogo);
     }
-    
-    public void atualizarJogo (Jogo jogo){
+
+    /**
+     * Atualiza informações de um jogo já presente no repositório.
+     */
+    public void atualizarJogo(Jogo jogo) {
         jogoService.criar(jogo);
     }
-    
-    public Jogo verJogo (long id){
+
+    /**
+     * Recupera um jogo no repositório através do seu identificador.
+     */
+    public Jogo verJogo(long id) {
         return jogoService.recuperar(id);
     }
-    
-    public Jogo verJogoPeloToken (String token){
+
+    /**
+     * Recupera um jogo no repositório através do seu token único.
+     */
+    public Jogo verJogoPeloToken(String token) {
         return jogoService.recuperar(token);
     }
-    
-    public void adicionarMembrosAoJogo (long idJogo, Membro... membros){
+
+    /**
+     * Adiciona membros à um jogo.
+     * 
+     * @param idJogo identificador do jogo ao qual os membros deverão ser adicionados.
+     * @param membros membros que deverão ser adicionados ao jogo.
+     */
+    public void adicionarMembrosAoJogo(long idJogo, Membro... membros) {
         jogoService.adicionarMembros(idJogo, membros);
     }
-    
-    public Jogos recuperarPaginaJogo (int page, int pageSize){
+
+    /**
+     * Faz uma recuperação paginada dentre todos os jogos presentes no repositório.
+     * 
+     * @param page número da página que deverá ser recuperada.
+     * @param pageSize número de elementos presentes em uma página.
+     */
+    public Jogos recuperarPaginaJogo(int page, int pageSize) {
         return jogoService.recuperarPagina(page, pageSize);
     }
-    
-    public Foto recuperarFoto (long id){
+
+    /**
+     * Faz uma recuperação paginada dentre todos os jogos já realizados.
+     * 
+     * @param page número da página que deverá ser recuperada.
+     * @param pageSize número de elementos presentes em uma página.
+     */
+    public Jogos recuperarPaginaJogoRealizados(int page, int pageSize){
+        return jogoService.recuperarPaginaRealizados(page, pageSize);
+    }
+
+    /**
+     * Recupera uma imagem do repositório.
+     */
+    public Foto recuperarFoto(long id) {
         return fotoService.recuperarFoto(id);
     }
-    
-    public void adicionarMembro (Membro membro){
+
+    /**
+     * Adiciona um novo membro ao repositório.
+     */
+    public void adicionarMembro(Membro membro) {
         membroService.criar(membro);
     }
-    
-    public Membro verMembro (String email){
+
+    /**
+     * Recupera um membro no repositório atrabés do seu e-mail.
+     */
+    public Membro verMembro(String email) {
         return membroService.verMembro(email);
     }
-    
-    public List<Membro> verTodosMembros (){
+
+    /**
+     * Recupera todos os membros presentes no repositório.
+     */
+    public List<Membro> verTodosMembros() {
         return membroService.verTodosMembros();
     }
-    
-    public void enviarEmail (Email email){
+
+    /**
+     * Envia um e-mail.
+     * 
+     * @param email contém informações relativas ao e-mail que deve ser enviado.
+     */
+    public void enviarEmail(Email email) {
         emailService.enviarEmail(email);
     }
-    
-    public void criarAlbum (AlbumFotos album){
+
+    /**
+     * Adiciona um novo album ao repositório.
+     */
+    public void criarAlbum(AlbumFotos album) {
         albumService.criarAlbum(album);
     }
-    
-    public AlbumFotos verAlbumJogo (long jogoId){
+
+    /**
+     * Recupera um album do repositório relacionado à um jogo.
+     * 
+     * @param jogoId identificador do jogo que deverá ter seu album recuperado.
+     */
+    public AlbumFotos verAlbumJogo(long jogoId) {
         return albumService.verAlbumJogo(jogoId);
     }
 }

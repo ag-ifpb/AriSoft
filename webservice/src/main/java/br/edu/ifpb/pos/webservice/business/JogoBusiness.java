@@ -3,7 +3,6 @@ package br.edu.ifpb.pos.webservice.business;
 import br.edu.ifpb.pos.core.dto.Jogos;
 import br.edu.ifpb.pos.core.entidades.AlbumFotos;
 import br.edu.ifpb.pos.core.entidades.Email;
-import br.edu.ifpb.pos.core.entidades.Foto;
 import br.edu.ifpb.pos.core.entidades.Jogo;
 import br.edu.ifpb.pos.core.entidades.JogoStatus;
 import br.edu.ifpb.pos.core.entidades.Membro;
@@ -15,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Classe contendo regras de negócio referentes à manipulação da entidade 
+ * {@link Jogo}.
+ * 
  * @author douglasgabriel
  * @version 0.1
  */
@@ -28,19 +29,41 @@ public class JogoBusiness {
         infraestruturaService = InfraestruturaServiceSingleton.getInstance();
     }
 
+    /**
+     * Verifica a consistência das informações referentes ao jogo, caso estejam
+     * corretas, aciona o serviço básico para adição de jogo.
+     * 
+     * @throws RemoteException caso as informações não estejam consistentes.
+     */
     public void salvarJogo(Jogo jogo) throws RemoteException {
         regrasParaSalvar(jogo);
         infraestruturaService.adicionarJogo(jogo);
     }
 
+    /**
+     * Recupera um jogo através do seu identificador.
+     * 
+     * @param id identificador do jogo que se deseja recuperar.
+     */
     public Jogo verJogo(long id) {
         return infraestruturaService.verJogo(id);
     }
     
+    /**
+     * Recupera um jogo através do seu token único.
+     * 
+     * @param token token do jogo que se deseja recuperar.
+     */
     public Jogo verJogo(String token) {
         return infraestruturaService.verJogoPeloToken(token);
     }
 
+    /**
+     * Adiciona membros a um jogo.
+     * 
+     * @param idJogo identificador do jogo que deve ter os membros adicionados.
+     * @param emails e-mails dos membros que devem ser adicionados ao jogo.
+     */
     public void adicionarMembrosAoJogo(long idJogo, String... emails) {
         List<Membro> membros = new ArrayList<>();
         Jogo jogo = infraestruturaService.verJogo(idJogo);
@@ -59,14 +82,37 @@ public class JogoBusiness {
         }
     }
 
+    /**
+     * Recupera uma página de jogos.
+     * 
+     * @param page número da página que deve ser recuperada.
+     */
     public Jogos recuperarPagina(int page) {
         return infraestruturaService.recuperarPaginaJogo(page, PAGE_SIZE);
     }
     
-    public void adicionarAlbumJogo (AlbumFotos album){
-        infraestruturaService.criarAlbum(album);
+    /**
+     * Recupera uma página apenas com jogos realizados.
+     */
+    public Jogos recuperarPaginaRealizados(int page){
+        return infraestruturaService.recuperarPaginaJogoRealizados(page, PAGE_SIZE);
     }
     
+    /**
+     * Adiciona um album de fotos de um jogo caso o mesmo já tenha sido encerrado.
+     */
+    public void adicionarAlbumJogo (AlbumFotos album){
+        Jogo jogo = infraestruturaService.verJogo(album.getJogoId());
+        if (jogo != null && jogo.getStatus().equals (JogoStatus.ENCERRADO))
+            infraestruturaService.criarAlbum(album);
+    }
+    
+    /**
+     * Confirma presença de um membro em um jogo.
+     * 
+     * @param email e-mail do membro que confirmou presença.
+     * @param token token único do jogo o qual o membro confirmou a presença.
+     */
     public void confirmarPresencaMembro (String email, String token){
         Jogo jogo = infraestruturaService.verJogoPeloToken(token);
         Membro membro = infraestruturaService.verMembro(email);
@@ -81,6 +127,11 @@ public class JogoBusiness {
         }
     }
 
+    /**
+     * Cancela um jogo e notifica os membros via e-mail.
+     * 
+     * @param jogoId identificador do jogo que deverá ser cancelado.
+     */
     public void cancelarJogo(long jogoId) {
         Jogo jogo = verJogo(jogoId);
         jogo.setStatus(JogoStatus.CANCELADO);
@@ -88,6 +139,11 @@ public class JogoBusiness {
         new EnviaEmailThread(jogo, JogoStatus.CANCELADO).start();
     }
 
+    /**
+     * Encerra um jogo e notifica os membros via e-mail.
+     * 
+     * @param jogoId identificador do jogo que deverá ser encerrado.
+     */
     public void encerrarJogo(long jogoId) {
         Jogo jogo = verJogo(jogoId);
         jogo.setStatus(JogoStatus.ENCERRADO);
@@ -95,6 +151,9 @@ public class JogoBusiness {
         new EnviaEmailThread(jogo, JogoStatus.ENCERRADO).start();
     }
 
+    /**
+     * Thread responsável por enviar e-mail de notificação para membros.
+     */
     private class EnviaEmailThread extends Thread {
 
         private Jogo jogo;
@@ -105,6 +164,10 @@ public class JogoBusiness {
             this.status = status;
         }
         
+        /**
+         * Constroi a mensagem de e-mail dependendo do Status do jogo informado e
+         * em seguida acessa o serviço básico de envio de e-mail.
+         */
         public void run() {
             String mensagem = "", assunto = "";
             if (status.equals(JogoStatus.CANCELADO)) {
@@ -130,6 +193,12 @@ public class JogoBusiness {
         }
     }
 
+    /**
+     * Método responsável por verificar a consistência das informações do jogo
+     * que deverá ser salvo.
+     * 
+     * @throws RemoteException caso algum dado não esteja consistente.
+     */
     private void regrasParaSalvar(Jogo jogo) throws RemoteException {
         try {
             if (jogo.getEnredo().isEmpty()) {

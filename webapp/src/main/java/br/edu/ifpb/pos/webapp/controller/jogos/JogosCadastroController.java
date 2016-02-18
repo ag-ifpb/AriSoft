@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
+ * Controlador responsável por funcionalidades relacionadas ao cadastro de jogos.
  *
  * @author douglasgabriel
  * @version 0.1
@@ -26,6 +27,9 @@ public class JogosCadastroController {
     @Inject
     private JogoService jogoService;
     
+    /**
+     * Serve fragmento html referente à visão de cadastro de jogos.
+     */
     @RequestMapping("")
     public @ResponseBody
     void index(HttpServletRequest request,
@@ -33,6 +37,15 @@ public class JogosCadastroController {
         PageServerUtils.serve("fragments/cadastro_jogos", request, response);
     }
     
+    /**
+     * Método responsável por tratar a requisição de adicionar um novo jogo.
+     * 
+     * @param form formulário contendo parâmetros para a criação de um novo jogo.
+     * @param imagem imagem que será relacionada ao jogo.
+     * 
+     * @return codigo 202 em caso de sucesso. Em caso de erro retorna uma mensagem
+     * descrevendo o erro.
+     */
     @RequestMapping(value="/adicionar", method = RequestMethod.POST)
     public @ResponseBody String adicionarJogo (AdicionarJogoForm form, MultipartFile imagem){
         try{

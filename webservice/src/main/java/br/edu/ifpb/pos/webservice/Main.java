@@ -5,7 +5,9 @@ import java.net.MalformedURLException;
 import javax.xml.ws.Endpoint;
 
 /**
- *
+ * Classe responsável por disponibilizar o serviço do projeto contendo as 
+ * funcionalidades do domínio do projeto.
+ * 
  * @author douglasgabriel
  * @version 0.1
  */

@@ -4,7 +4,8 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- *
+ * Classe que representa o formulario de criação de album.
+ * 
  * @author douglasgabriel
  * @version 0.1
  */

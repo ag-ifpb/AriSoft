@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/")
 public class MainController {
 
+    /**
+     * Método responsável por servir a pagina principal da aplicaçao
+     */
     @RequestMapping("/")
     public @ResponseBody
     void index(HttpServletRequest request,

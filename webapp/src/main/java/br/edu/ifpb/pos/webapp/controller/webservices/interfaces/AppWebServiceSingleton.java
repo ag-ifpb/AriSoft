@@ -6,7 +6,9 @@ import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
 /**
- *
+ * Classe que implementa o padrão singleton para uma instância do Web Service de
+ * domínio do projeto.
+ * 
  * @author douglasgabriel
  * @version 0.1
  */

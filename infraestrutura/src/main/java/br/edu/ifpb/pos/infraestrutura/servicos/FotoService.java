@@ -6,7 +6,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
+ * Serviço contendo operações referentes à entidade {@link Foto}
+ * 
  * @author douglasgabriel
  * @version 0.1
  */
@@ -15,7 +16,12 @@ public class FotoService {
 
     @Inject
     private FotoRepository repository;
-    
+   
+    /**
+     * Recupera uma foto através do seu identificador
+     * 
+     * @param id identificador da foto
+     */
     public Foto recuperarFoto (long id){
         return repository.findOne(id);
     }

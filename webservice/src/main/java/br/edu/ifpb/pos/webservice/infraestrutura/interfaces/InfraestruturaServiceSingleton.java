@@ -6,7 +6,9 @@ import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
 /**
- *
+ * Classe que implementa o padrão singleton para o acesso à instância da interface
+ * do Web Service básico.
+ * 
  * @author douglasgabriel
  * @version 0.1
  */
@@ -28,6 +30,9 @@ public class InfraestruturaServiceSingleton {
         return service;
     }
 
+    /**
+     * Metodo responsavel por recuperar a instancia do Web Service basico.
+     */
     private static InfraestruturaService recuperarInfraestruturaService() throws MalformedURLException {
         URL url = new URL("http://localhost:8081/service?wsdl");
         QName qname = new QName("http://servicos.infraestrutura.pos.ifpb.edu.br/", "InfraestruturaService");

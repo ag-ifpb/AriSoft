@@ -22,6 +22,10 @@ public class MembrosController {
     @Inject
     private MembroService service;
     
+    /**
+     * Método responsável por servir a página principal para visualização e cadastro
+     * de membros.
+     */
     @RequestMapping("")
     public @ResponseBody
     void index(HttpServletRequest request,

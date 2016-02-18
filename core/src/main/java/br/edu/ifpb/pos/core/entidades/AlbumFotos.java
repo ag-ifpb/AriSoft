@@ -14,9 +14,11 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * Representa uma coleção de fotos relacionada à um jogo.
+ * 
  * @author douglasgabriel
  * @version 0.1
+ * @see Jogo
  */
 @Entity
 @XmlRootElement

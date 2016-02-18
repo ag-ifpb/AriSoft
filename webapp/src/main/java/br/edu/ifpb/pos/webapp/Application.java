@@ -18,7 +18,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 public class Application {
     
     private static TemplateEngine templateEngine;
-
+   
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
@@ -27,7 +27,9 @@ public class Application {
         initializeTemplateEngine();        
     }
 
-    //Thymeleaf configurations
+    /**
+     * Método responsável por configurar o Thymeleaf.
+     */
     private static void initializeTemplateEngine() {
 
         ServletContextTemplateResolver templateResolver

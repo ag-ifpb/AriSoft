@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- *
+ * Controlador responsável por servir imagens.
+ * 
  * @author douglasgabriel
  * @version 0.1
  */
@@ -19,6 +20,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/imagem/{id}")
 public class FotoController {
 
+    /**
+     * Método responsável por servir uma imagem através de sua identificação.
+     * 
+     * @param response resposta ao qual a imagem será escrita.
+     * @param id identificação da imagem que deverá ser recuperada.
+     */
     @RequestMapping(value="", produces = {MediaType.IMAGE_GIF_VALUE,MediaType.IMAGE_JPEG_VALUE,MediaType.IMAGE_PNG_VALUE}, method = RequestMethod.GET)
     public void servirFoto(HttpServletResponse response, @PathVariable long id) {
         Foto foto = AppWebServiceSingleton.getInstance().verFoto(id);

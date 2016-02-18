@@ -1,4 +1,5 @@
 var pagina = 0;
+var paginaRealizados = 0;
 function linkJogo() {
     $.ajax({
         url: "/jogos",
@@ -9,6 +10,18 @@ function linkJogo() {
         wrapper.append(data);
         pagina = 0;
         carregarPaginaJogos();
+    });
+}
+function linkJogosRealizados() {    
+    $.ajax({
+        url: "/jogos/realizados",
+        context: document.body
+    }).done(function (data) {
+        var wrapper = $('.content-wrapper');
+        wrapper.empty();
+        wrapper.append(data);
+        paginaRealizados = 0;
+        carregarPaginaJogosRealizados();
     });
 }
 function linkJogoMembros(id) {
@@ -52,6 +65,17 @@ function carregarPaginaJogos (){
         var wrapper = $('.content-wrapper .content');        
         wrapper.append(data);
         pagina++;
+    });
+}
+function carregarPaginaJogosRealizados (){
+    $.ajax({
+        url: "/jogos/page/"+ paginaRealizados +"/realizados",
+        context: document.body
+    }).done(function (data) {
+        $(".load-more").remove();
+        var wrapper = $('.content-wrapper .content');        
+        wrapper.append(data);
+        paginaRealizados++;
     });
 }
 function linkCadastrarJogo() {

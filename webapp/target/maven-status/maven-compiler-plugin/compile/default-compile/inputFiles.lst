@@ -4,6 +4,7 @@
 /home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/controller/forms/AdicionarMembroForm.java
 /home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/controller/membros/MembrosCadastrarController.java
 /home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/controller/MainController.java
+/home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/controller/forms/MultiplasImagensForm.java
 /home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/controller/fotos/FotoController.java
 /home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/controller/membros/MembrosController.java
 /home/douglas/Documentos/Repositorios/airsoft/webapp/src/main/java/br/edu/ifpb/pos/webapp/controller/jogos/JogosCadastroController.java

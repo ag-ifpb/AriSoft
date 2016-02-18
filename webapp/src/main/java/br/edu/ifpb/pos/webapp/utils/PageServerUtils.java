@@ -14,7 +14,12 @@ import org.thymeleaf.context.WebContext;
  */
 public class PageServerUtils {
 
-    
+    /**
+     * Método responsável por renderizar uma página html com a tecnologia thymeleaf
+     * e escrevê-la na resposta.
+     * 
+     * @param page nome da página que deverá ser renderizada.
+     */
     public static @ResponseBody void serve (String page
             , HttpServletRequest request, HttpServletResponse response) throws IOException{
         WebContext ctx

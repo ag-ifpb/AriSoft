@@ -7,7 +7,8 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
 /**
- *
+ * Serviço que possui funcionalidades referentes ao envio de e-mails
+ * 
  * @author douglasgabriel
  * @version 0.1
  */
@@ -17,11 +18,19 @@ public class EmailService {
     @Inject
     private MailSender sender;
 
+    /**
+     * Instancia uma thread responsável por mandar o e-mail.
+     * 
+     * @param email contém as características do e-mail que deverá ser enviado
+     */
     public void enviarEmail(Email email) {
         new EnviaEmail(email, sender).start();
     }
 
-    public class EnviaEmail extends Thread {
+    /**
+     * Thread responsável por enviar o e-mail.
+     */
+    private class EnviaEmail extends Thread {
 
         private Email email;
         private MailSender sender;
@@ -31,6 +40,10 @@ public class EmailService {
             this.sender = sender;
         }
         
+        /**
+         * Utiliza-se do pacote org.springframework.mail para enviar o e-mail
+         * desejado.
+         */
         public void run() {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(email.getDestinatario());

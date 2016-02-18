@@ -6,7 +6,8 @@ import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * Representa uma imagem.
+ * 
  * @author douglasgabriel
  * @version 0.1
  */

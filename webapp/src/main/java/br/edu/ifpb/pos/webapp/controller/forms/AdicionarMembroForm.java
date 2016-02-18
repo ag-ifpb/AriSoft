@@ -1,7 +1,8 @@
 package br.edu.ifpb.pos.webapp.controller.forms;
 
 /**
- *
+ * Classe que representa o formulario de criaçao de membros
+ * 
  * @author douglasgabriel
  * @version 0.1
  */
